@@ -219,7 +219,10 @@ body {
 	font-family: "Inter", sans-serif;
 	font-weight: 400;
 	&.lock {
-		overflow: hidden;
+		overflow: hidden !important;
+	}
+	@media (max-width: $md2) {
+		height: auto !important;
 	}
 }
 
@@ -339,6 +342,9 @@ textarea:focus:-ms-input-placeholder {
 }
 .main {
 	flex: 1 1 auto;
+	@media (max-width: $md2) {
+		transform: none !important;
+	}
 }
 .fp-scrollable .fp-section:not(.fp-auto-height):not([data-percentage]),
 .fp-scrollable .fp-slide:not(.fp-auto-height):not([data-percentage]),
@@ -356,6 +362,7 @@ textarea:focus:-ms-input-placeholder {
 .main-fullpage {
 	@media (max-width: $md2) {
 		padding-top: 56px;
+		transform: none !important;
 	}
 	// .main-fullpage__item
 	&__item {
@@ -1541,11 +1548,34 @@ textarea:focus:-ms-input-placeholder {
 			padding: 20px 20px 20px 64px;
 		}
 		@media (max-width: $md2) {
-			padding: 40px 16px 16px;
-		}
-		@media (max-width: $md3) {
-			padding: 40px 20px 16px;
-			right: -100%;
+			padding: 96px 20px 50px;
+			right: 0;
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			z-index: 10;
+			opacity: 0;
+			visibility: hidden;
+			pointer-events: none;
+			background: rgba(0, 0, 0, 0.5);
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			overflow: auto;
+			&:before {
+				content: "";
+				flex: 0 0 0;
+				margin: auto;
+				position: static;
+				width: 100%;
+			}
+			&:after {
+				content: "";
+				flex: 0 0 0;
+				margin: auto;
+			}
 		}
 		&:before {
 			content: "";
@@ -1560,8 +1590,23 @@ textarea:focus:-ms-input-placeholder {
 		}
 		&.active {
 			right: 0;
+			@media (max-width: $md2) {
+				opacity: 1;
+				visibility: visible;
+				pointer-events: auto;
+			}
 		}
 	}
+
+	// .ah-spoiler__wrap
+	&__wrap {
+		@media (max-width: $md2) {
+			position: relative;
+			background: var(--color-white);
+			padding: 50px 20px 30px;
+		}
+	}
+
 	// .ah-spoiler__close
 	&__close {
 		position: absolute;
@@ -1581,6 +1626,11 @@ textarea:focus:-ms-input-placeholder {
 			height: 20px;
 			top: 10px;
 			left: 20px;
+		}
+		@media (max-width: $md2) {
+			top: 20px;
+			left: auto;
+			right: 20px;
 		}
 		svg {
 			width: 32px;
